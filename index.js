@@ -11,7 +11,7 @@ const port = process.env.PORT || 6001;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://nexo.jrts.site/"],
     credentials: true,
   })
 );
