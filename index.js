@@ -11,7 +11,7 @@ const port = process.env.PORT || 6001;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://nexo.jrts.site/"],
+    origin: ["http://localhost:5173", "https://nexo.jrts.site"],
     credentials: true,
   })
 );
@@ -21,7 +21,7 @@ app.use("/api", router);
 connectDB().then(() => {
   app.listen(port, () =>
     console.log(
-      `server is running on port ${port} or visit https://localhost:${port}/`
+      `server is running on port ${port} or visit https://localhost:${port}`
     )
   );
 });
