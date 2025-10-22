@@ -29,18 +29,18 @@ export const signUp = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      isVarified: true
+      isVarified: true,
     });
 
     const { password: _, ...userData } = user._doc;
 
-    const token = await generateToken(user._id, res)
+    const token = await generateToken(user._id, res);
 
     res.status(201).json({
       status: true,
       message: "User created successfully!",
       user: userData,
-      token
+      token,
     });
   } catch (error) {
     console.error(error);
@@ -72,12 +72,12 @@ export const signIn = async (req, res) => {
     }
 
     const { password: _, ...userData } = user._doc;
-   const token = await generateToken(user._id, res)
+    const token = await generateToken(user._id, res);
     res.status(200).json({
       status: true,
       message: "Signed in successfully!",
       user: userData,
-      token: token
+      token: token,
     });
   } catch (error) {
     console.error(error);
@@ -88,19 +88,35 @@ export const signIn = async (req, res) => {
   }
 };
 
+export const signOut = async (req, res) => {
+  try {
+    res.cookie("session_code", "", { maxAge: 0 });
+    res.status(200).json({
+      status: true,
+      message: "Signed out",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      status: false,
+    });
+  }
+};
 
-export const signOut = async(req, res) => {
-    try {
-        res.cookie("session_code", "", {maxAge: 0});
-        res.status(200).json({
-          status: true,
-          message: "Signed out"
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(501).json({
-            message: error.message,
-            status: false
-        })
-    }
-}
+export const checkAuth = async (req, res) => {
+  try {
+    res.status(201).json({
+      status: true,
+      message: "user logged in",
+      user: req.user,
+      loggedIn: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      status: false,
+    });
+  }
+};
