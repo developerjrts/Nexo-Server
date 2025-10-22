@@ -21,13 +21,13 @@ const userSchema = new mongoose.Schema(
     },
     isVarified: {
       type: Boolean,
-      default: false
+      default: false,
     },
     password: {
       type: String,
       required: true,
       minlength: 6,
-      select: false, 
+      select: false,
     },
     profilePic: {
       type: String,
@@ -65,6 +65,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const userModel = mongoose.model("user", userSchema)
+const userModel = mongoose.model("user", userSchema);
 
-export default userModel
+export default userModel;
