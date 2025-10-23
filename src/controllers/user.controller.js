@@ -19,5 +19,28 @@ export const getUserByUsername = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(501).json({
+      message: error.message,
+      status: false,
+    });
+  }
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const users = await userModel.find({ _id: { $ne: userId } });
+
+    res.status(200).json({
+      status: true,
+      message: "users sent",
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      status: false,
+    });
   }
 };

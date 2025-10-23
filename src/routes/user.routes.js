@@ -7,4 +7,6 @@ userRoutes
   .route("/:username")
   .get(verifyUser, userController.getUserByUsername);
 
+userRoutes.route("/get-users").get(verifyUser, userController.getAllUsers);
+
 export default userRoutes;
