@@ -4,7 +4,6 @@ export const getMessages = async (req, res) => {
   try {
     const receiverId = req.params.receiverId;
     const userId = req.user._id;
-
     const messages = await messageModel
       .find({
         $or: [
