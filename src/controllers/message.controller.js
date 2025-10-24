@@ -40,6 +40,12 @@ export const sendMessage = async (req, res) => {
       receiverId,
       message,
     });
+
+    res.status(201).json({
+      status: true,
+      message: "message sent",
+      newMessage,
+    });
   } catch (error) {
     console.log(error);
     res.status(501).json({
