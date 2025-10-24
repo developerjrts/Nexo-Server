@@ -8,4 +8,8 @@ messageRoutes
   .route("/messages/:receiverId")
   .get(verifyUser, messageController.getMessages);
 
+messageRoutes
+  .route("/send/:receiverId")
+  .post(verifyUser, messageController.sendMessage);
+
 export default messageRoutes;

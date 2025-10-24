@@ -28,3 +28,23 @@ export const getMessages = async (req, res) => {
     });
   }
 };
+
+export const sendMessage = async (req, res) => {
+  try {
+    const receiverId = req.params.receiverId;
+    const message = req.body.message;
+    const senderId = req.user._id;
+
+    const newMessage = await messageModel.create({
+      senderId,
+      receiverId,
+      message,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      status: false,
+    });
+  }
+};
